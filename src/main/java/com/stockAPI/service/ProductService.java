@@ -21,11 +21,12 @@ public class ProductService {
     private final ProductMapper productMapper;
 
 
-    public MessageResponseDTO createProduct(ProductDTO productDTO) {
+    public ProductDTO createProduct(ProductDTO productDTO) {
         Product productToSave = productMapper.toModel(productDTO);
         Product savedProduct = productRepository.save(productToSave);
-        return createMessageResponseDTO(savedProduct.getId(),"Created product successfully on ID ");
+        return productMapper.toDTO(savedProduct);
     }
+
 
     public List<ProductDTO> listAll() {
         List<Product> allProducts = productRepository.findAll();
